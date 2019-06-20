@@ -1,2 +1,9 @@
 <h1>Home</h1>
-<p>Find me in app/views/home/home.html.erb</p>
+<p>Welcome to finance App</p>
+<% if user_signed_in? %>
+
+<p>Start by adding your daily transactions here</p>
+<% else %>
+
+<p>Start by logging in or Signing up</p>
+<% end %>
