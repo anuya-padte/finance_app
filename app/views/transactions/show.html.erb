@@ -1,0 +1,23 @@
+<h1>Transaction</h1>
+<table class="table table-condensed">
+  <tr>
+    <th>Date</th>
+    <td><%= @transaction.trans_date %></td>
+  </tr>
+  <tr>
+    <th>Description</th>
+    <td><%= @transaction.description %></td>
+  </tr>
+  <tr>
+    <th>Amount</th>
+    <td><%= @transaction.amount %></td>
+  </tr>
+  <tr>
+    <th>Type</th>
+    <td><%= @transaction.type %></td>
+  </tr>
+</table>
+
+<%= link_to 'Back', sti_transaction_path(@type) %> | 
+<%= link_to 'Edit', sti_transaction_path(@transaction.type, @transaction, :edit) %>
+<br><br>

@@ -1,0 +1,31 @@
+
+<h1>All <%=@type.pluralize%></h1>
+
+<table class="table table-condensed">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Amount</th>
+      <th>Type</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+</thead>
+  <tbody>
+    <% @transactions.each do |transaction| %>
+      <tr>
+        <td><%= transaction.trans_date %></td>
+        <td><div style="float:right; margin-right:25px; "><%= transaction.amount %></div></td>
+        <td><%= transaction.type %></td>
+        <td><%= link_to 'Show', sti_transaction_path(transaction.type, transaction) %></td>
+        <td><%= link_to 'Edit', sti_transaction_path(transaction.type, transaction, :edit) %></td>
+        <td><%= link_to 'Destroy', sti_transaction_path(transaction.type, transaction), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'See all transactions', sti_transaction_path %> | 
+<%= link_to "New #{@type}", sti_transaction_path(@type, nil, :new) %>
+<br><br>
