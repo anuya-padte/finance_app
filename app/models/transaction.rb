@@ -7,5 +7,9 @@ class Transaction < ApplicationRecord
   scope :incomes, -> { where(type: 'Income') }
   scope :expenses, -> { where(type: 'Expense') }
 
+  def self.types
+    %w(Income Expense)
+  end
+
   #total, highest, lowest
 end

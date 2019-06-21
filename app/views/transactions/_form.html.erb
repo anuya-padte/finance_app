@@ -13,8 +13,11 @@
 
   <div class="field">
       <%= f.label :type %><br>
-      <%= f.select :type, ['Income', 'Expense'], {}, disabled: @type != "Transaction" %>
+      <%= f.select :type, Transaction.types.map {|r| [r.humanize]}, {}, disabled: @type != "Transaction" %>
   </div>
+  <% if @type !="Transaction" %>
+      <input type="hidden" name="<%=@type.downcase%>[type]" value="<%=@type%>">
+  <% end %>
 
   <div class="field">
     <%= f.label :amount %><br />

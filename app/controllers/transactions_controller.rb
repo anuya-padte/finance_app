@@ -10,6 +10,9 @@ class TransactionsController < ApplicationController
   end
 
   def show
+    p "Reached show"
+
+    @income = Transaction.find(params[:id])
   end
 
   def new
@@ -20,7 +23,7 @@ class TransactionsController < ApplicationController
     @transaction = current_user.transactions.build(tran_params)
     if @transaction.save
       flash[:success] = "Transaction created!"
-      redirect_to @transaction
+      redirect_to transaction_path @transaction
     else
       flash[:warning] = "Transaction not created!"
       render action: 'new'
@@ -67,12 +70,7 @@ class TransactionsController < ApplicationController
   end
 
   def type 
-    @transactions = Transaction.all.uniq.pluck(:type)
-    if @transactions.include?(params[:type])
-      return params[:type]
-    else
-      return "Transaction"
-    end
+    Transaction.types.include?(params[:type]) ? params[:type] : "Transaction"
   end
 
   def type_class 
