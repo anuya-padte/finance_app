@@ -7,16 +7,17 @@ class TransactionsController < ApplicationController
   def index
     #all
     @transactions = type_class.all.where(user_id: current_user.id)
+    @total = type_class.where(user_id: current_user.id).sum("amount")
   end
 
   def show
     p "Reached show"
-
     @income = Transaction.find(params[:id])
   end
 
   def new
     @transaction = type_class.new
+    @categories = Category.where(user_id: nil).or(Category.where(user_id: current_user.id)).where(cat_type: "#{type_class}")
   end
 
   def create
@@ -32,8 +33,9 @@ class TransactionsController < ApplicationController
 
   def edit
     @transaction = Transaction.find(params[:id])
+    @categories = Category.where(user_id: nil).or(Category.where(user_id: current_user.id)).where(cat_type: "#{type_class}")
   end
-
+  
   def update
     @transaction = Transaction.find(params[:id])
     if @transaction.update_attributes(tran_params)
@@ -53,7 +55,7 @@ class TransactionsController < ApplicationController
   private #------------------------------PRIVATE METHODS----------------------------------
 
   def tran_params
-    params.require(type.underscore.to_sym).permit(:type, :trans_date, :amount, :description)
+    params.require(type.underscore.to_sym).permit(:type, :trans_date, :amount, :description, :category_id)
   end
 
   def correct_user
@@ -77,10 +79,4 @@ class TransactionsController < ApplicationController
     type.constantize 
   end
 
-  def logged_in_user
-    unless user_signed_in?
-      flash[:danger] = "Please log in."
-      redirect_to new_user_session_path
-    end
-  end
 end

@@ -16,7 +16,12 @@
     <th>Type</th>
     <td><%= @income.type %></td>
   </tr>
+  <tr>
+    <th>Category</th>
+    <td><%= @income.category.name %></td>
+  </tr>
 </table>
-# <%= link_to 'Back', sti_transaction_path(@type) %> | 
-# <%= link_to 'Edit', sti_transaction_path(@transaction.type, @transaction, :edit) %>
+<%= link_to 'Back', sti_transaction_path("Transaction") %> | 
+<%= link_to 'Edit', sti_transaction_path(@transaction.type, @transaction, :edit) %> | 
+<%= link_to 'Destroy', sti_transaction_path(@transaction.type, @transaction), method: :delete, data: { confirm: 'Are you sure?' } %>
 <br><br>

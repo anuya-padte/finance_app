@@ -23,9 +23,18 @@
         <td><%= link_to 'Destroy', sti_transaction_path(transaction.type, transaction), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
+    <% if @type != "Transaction" %>
+    <tr>
+      <th>Total</th>
+      <td><div style="float:right; margin-right:25px; "> <%= @total %> </div><td>
+      <td colspan="4"><td>
+    <tr>
+    <% end %>
   </tbody>
 </table>
-
+<% if @type !="Transaction" %>
 <%= link_to 'See all transactions', sti_transaction_path %> | 
-<%= link_to "New #{@type}", sti_transaction_path(@type, nil, :new) %>
+<% end %>
+<%= link_to "New Income", sti_transaction_path("Income", nil, :new) %> | 
+<%= link_to "New Expense", sti_transaction_path("Expense", nil, :new) %>
 <br><br>

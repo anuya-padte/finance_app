@@ -1,5 +1,6 @@
 class Transaction < ApplicationRecord
   belongs_to :user
+  belongs_to :category , optional: true
   validates :user_id, presence: true
   validates :amount, presence: true
   validates :trans_date, presence: true
