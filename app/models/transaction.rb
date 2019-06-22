@@ -12,4 +12,7 @@ class Transaction < ApplicationRecord
   end
 
   #total, highest, lowest
+  def total
+    raise 'Abstract Method' 
+  end
 end

@@ -2,21 +2,21 @@
 <table class="table table-condensed">
   <tr>
     <th>Date</th>
-    <td><%= @income.trans_date %></td>
+    <td><%= @transaction.trans_date %></td>
   </tr>
   <tr>
     <th>Description</th>
-    <td><%= @income.description %></td>
+    <td><%= @transaction.description %></td>
   </tr>
   <tr>
     <th>Amount</th>
-    <td><%= @income.amount %></td>
+    <td><%= @transaction.amount %></td>
   </tr>
   <tr>
     <th>Type</th>
-    <td><%= @income.type %></td>
+    <td><%= @transaction.type %></td>
   </tr>
 </table>
-# <%= link_to 'Back', sti_transaction_path(@type) %> | 
-# <%= link_to 'Edit', sti_transaction_path(@transaction.type, @transaction, :edit) %>
+<%= link_to 'Back', sti_transaction_path(@type) %> | 
+<%= link_to 'Edit', sti_transaction_path(@transaction.type, @transaction, :edit) %>
 <br><br>

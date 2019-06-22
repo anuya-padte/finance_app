@@ -23,6 +23,13 @@
         <td><%= link_to 'Destroy', sti_transaction_path(transaction.type, transaction), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
+    <% if @type !="Transaction" %>
+    <tr>
+      <th>Total</th>
+      <td><div style="float:right; margin-right:25px; "><%= @total %></div></td>
+      <td colspan="4"></td>
+    </tr>
+    <% end %>
   </tbody>
 </table>
 

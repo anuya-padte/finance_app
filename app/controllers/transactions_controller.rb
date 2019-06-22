@@ -7,12 +7,10 @@ class TransactionsController < ApplicationController
   def index
     #all
     @transactions = type_class.all.where(user_id: current_user.id)
+    @total = type_class.all.where(user_id: current_user.id).sum("amount")
   end
 
   def show
-    p "Reached show"
-
-    @income = Transaction.find(params[:id])
   end
 
   def new
