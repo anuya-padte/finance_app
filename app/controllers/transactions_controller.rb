@@ -1,4 +1,6 @@
 class TransactionsController < ApplicationController
+  include Pagy::Backend
+
   before_action :logged_in_user
   before_action :correct_user,    only: [:show, :edit, :update, :destroy]
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
@@ -6,7 +8,7 @@ class TransactionsController < ApplicationController
 
   def index
     #all
-    @transactions = type_class.all.where(user_id: current_user.id)
+    @pagy , @transactions = pagy(type_class.all.where(user_id: current_user.id), items:10)
     @total = type_class.where(user_id: current_user.id).sum("amount")
   end
 

@@ -14,8 +14,8 @@
       <% end %>
 
       <div class="field">
-          <%= f.label :type %><br>
-          <%= f.select :type, Transaction.types.map {|r| [r.humanize]}, {}, disabled: @type != "Transaction" %>
+          <%= f.label :type %>: 
+          <%= f.select :type, Transaction.types.map {|r| [r.humanize]}, {} , disabled: @type != "Transaction" %>
       </div>
       <% if @type !="Transaction" %>
           <input type="hidden" name="<%=@type.downcase%>[type]" value="<%=@type%>">
@@ -23,33 +23,29 @@
 
       <div class="field">
           <%= f.label "Category" %> <%= link_to "(Add new category)", "/category?type=#{@type}" %>  <br>
-          <select name = "<%=@type.downcase%>[category_id]" required>
-            <option disabled selected> Select</option>
-            <% @categories.each do |category| %>
-              <option value = "<%= category.id %>" <% if @transaction.category_id == category.id %>selected<%end%> > <%= category.name %> </option>
-            <% end %>
-          </select>
+          <%= f.collection_select :category_id, @categories, :id, :name, { prompt: "Select" }, { class: "form-control", required: true } %>
       </div>
 
       <div class="field">
         <%= f.label :amount %><br />
-        <%= f.text_field :amount, autofocus: true %>
+        <%= f.text_field :amount, autofocus: true , class: "form-control" %>
       </div>
 
       <div class="field">
         <%= f.label "Transaction Date" %><br />
-        <%= f.date_field :trans_date %>
+        <%= f.date_field :trans_date , class: "form-control" %>
       </div>
 
       <div class="field">
         <%= f.label :description %><br>
-        <%= f.text_area :description %>
+        <%= f.text_area :description, class: "form-control" %>
       </div>
 
       <div class="actions">
-        <%= f.submit %>
+        <%= f.submit "Create", class: "btn btn-default" %>
       </div>
     <% end %>
+    <br><br>
     <%= link_to 'Back', sti_transaction_path("Transaction") %>
 <br><br>
   </div>
