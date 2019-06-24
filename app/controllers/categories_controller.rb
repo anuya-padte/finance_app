@@ -5,8 +5,8 @@ class CategoriesController < ApplicationController
   def create
     @category = current_user.categories.build(cat_params)
     if @category.save
-      flash[:success] = "Category created!"
-      redirect_to '/help'
+      flash[:success] = "#{@category.cat_type} Category created!"
+      redirect_back(fallback_location: root_url)
     else
       @feed_items = []
       render 'transactions/index'
@@ -16,7 +16,7 @@ class CategoriesController < ApplicationController
   def destroy
     @category.destroy
     flash[:success] = "category deleted"
-    redirect_to root_url
+    redirect_back(fallback_location: root_url)
   end
 
   def add_category
