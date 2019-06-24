@@ -1,6 +1,9 @@
 class Transaction < ApplicationRecord
   belongs_to :user
   belongs_to :category , optional: true
+
+  default_scope -> { order(trans_date: :asc) }
+
   validates :user_id, presence: true
   validates :amount, presence: true
   validates :category_id, presence: true
@@ -11,10 +14,5 @@ class Transaction < ApplicationRecord
 
   def self.types
     %w(Income Expense)
-  end
-
-  #total, highest, lowest
-  def total
-    raise 'Abstract Method' 
   end
 end

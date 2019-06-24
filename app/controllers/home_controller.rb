@@ -8,12 +8,12 @@ class HomeController < ApplicationController
   end
 
   def total
-    @total1 = current_user.incomes.sum("amount")
-    #@total1 = current_user.incomes.where('extract(month from trans_date) = ?', 6).sum("amount") #.select("SUM('amount') as total")
-    @total2 = current_user.expenses.sum("amount")#.where"MONTH(date_column) = 12"
+    # @total1 = current_user.incomes.sum("amount")
+    # @total2 = current_user.expenses.sum("amount")
 
     @try = Category.joins(:transactions)
                    .select("categories.name AS c_name,
+                            categories.cat_type AS c_type,
                             count(transactions.id) AS count,
                             max(transactions.amount) as max,
                             min(transactions.amount) as min,

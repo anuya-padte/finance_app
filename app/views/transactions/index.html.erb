@@ -1,5 +1,13 @@
-
-<h1>All <%=@type.pluralize%></h1>
+<div class="row">
+  <h1>All <%=@type.pluralize%></h1>
+  <div class="pull-right range-query">
+    <%= form_tag sti_transaction_path(@type), method: :get do %>
+      <%= text_field_tag 'search[date_from]', @search.date_from %>
+      <%= text_field_tag 'search[date_to]', @search.date_to %>
+      <%= submit_tag 'Search', class: 'btn search-button' %>
+    <% end %>
+  </div>
+</div>
 
 <table class="table table-condensed">
   <thead>
@@ -13,14 +21,14 @@
     </tr>
 </thead>
   <tbody>
-    <% @transactions.each do |transaction| %>
+    <% @invoices.each do |invoice| %>
       <tr>
-        <td><%= transaction.trans_date %></td>
-        <td><div style="float:right; margin-right:25px; "><%= transaction.amount %></div></td>
-        <td><%= transaction.type %></td>
-        <td><%= link_to 'Show', sti_transaction_path(transaction.type, transaction) %></td>
-        <td><%= link_to 'Edit', sti_transaction_path(transaction.type, transaction, :edit) %></td>
-        <td><%= link_to 'Destroy', sti_transaction_path(transaction.type, transaction), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= invoice.trans_date %></td>
+        <td><div style="float:right; margin-right:25px; "><%= invoice.amount %></div></td>
+        <td><%= invoice.type %></td>
+        <td><%= link_to 'Show', sti_transaction_path(invoice.type, invoice) %></td>
+        <td><%= link_to 'Edit', sti_transaction_path(invoice.type, invoice, :edit) %></td>
+        <td><%= link_to 'Destroy', sti_transaction_path(invoice.type, invoice), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
     <% if @type != "Transaction" %>

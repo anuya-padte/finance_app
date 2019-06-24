@@ -8,8 +8,13 @@ class TransactionsController < ApplicationController
 
   def index
     #all
-    @pagy , @transactions = pagy(type_class.all.where(user_id: current_user.id), items:10)
-    @total = type_class.where(user_id: current_user.id).sum("amount")
+    @search = TransactionSearch.new(params[:search])
+    if "#{type_class}" == "Transaction"
+      @pagy , @invoices = pagy(@search.scope.where(user_id: current_user.id), items:5)
+    else
+      @pagy , @invoices = pagy(@search.scope.where(user_id: current_user.id).where(type: "#{type_class}"), items:5)
+      @total = @search.scope.where(user_id: current_user.id).where(type: "#{type_class}").sum("amount")
+    end
   end
 
   def show

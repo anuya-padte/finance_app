@@ -1,28 +1,30 @@
 <h1>Total</h1>
-<pre>
+<!-- <pre>
 <h5>Income  <%=@total1%></h5>
 <h5>Expense <%=@total2%></h5>
-</pre>
+</pre> -->
 <table class="table table-condensed">
   <thead>
     <tr>
       <th>Category</th>
+      <th>Type</th>
       <th>Total</th>
       <th>Maximum</th>
       <th>Minimum</th>
       <th>Average</th>
-      <th></th>
+      
     </tr>
 </thead>
   <tbody>
     <% @try.each do |t| %>
       <tr>
         <td><%= t.c_name %></td>
+        <td><%= t.c_type %></td>
         <td><%= t.count %></td>
         <td><%= t.max %></td>
         <td><%= t.min %></td>
         <td><%= t.avg %></td>
-        <td><%= link_to 'View', "#"%></td>
+        
       </tr>
     <% end %>
   </tbody>
