@@ -7,7 +7,7 @@ class HomeController < ApplicationController
     end
   end
 
-  def total
+  def summary
     # @total1 = current_user.incomes.sum("amount")
     # @total2 = current_user.expenses.sum("amount")
 
@@ -22,4 +22,6 @@ class HomeController < ApplicationController
                    .where("transactions.user_id = #{current_user.id}")
 
   end
+
+
 end
