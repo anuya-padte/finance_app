@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
   root 'home#home'
-  get      '/summary',   to: 'home#summary'
+  get      '/summary' ,    to: 'home#summary'
   get      '/category',    to: 'categories#add_category'
+  get      '/details' ,    to: 'home#detail'
 
   resources :transactions
   resources :categories,          only: [:create, :destroy]

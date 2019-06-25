@@ -1,0 +1,31 @@
+<h1>Details</h1>
+<h3><%= @category.name %> (<%= @category.cat_type %>)</h3>
+
+<table class="table table-condensed">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Description</th>
+      <th>Amount</th>
+      <th>View</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @transactions.each do |t| %>
+      <tr>
+        <td><%= t.trans_date %></td>
+        <td><%= t.description %></td>
+        <td><%= t.amount %></td>
+        <td><%= link_to 'Show', sti_transaction_path(t.type, t) %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <th>Total</th>
+      <td><%= @total%></td>
+      <td colspan=2><td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<%= link_to "Back", summary_path %> | 
+<%= link_to "Print PDF", details_path(id: @category.id, format: "pdf") %>

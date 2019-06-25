@@ -8,11 +8,11 @@
     <tr>
       <th>Category</th>
       <th>Type</th>
-      <th>Total</th>
+      <th>Count</th>
       <th>Maximum</th>
       <th>Minimum</th>
       <th>Average</th>
-      
+      <th></th>
     </tr>
 </thead>
   <tbody>
@@ -24,7 +24,7 @@
         <td><%= t.max %></td>
         <td><%= t.min %></td>
         <td><%= t.avg %></td>
-        
+        <td><%= link_to "View" , details_path(id: t.cid) %></td>
       </tr>
     <% end %>
   </tbody>

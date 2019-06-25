@@ -22,7 +22,7 @@
       <% end %>
 
       <div class="field">
-          <%= f.label "Category" %> <%= link_to "(Add new category)", "/category?type=#{@type}" %>  <br>
+          <%= f.label "Category" %> <%= link_to "(Add new category)", category_path(type: @type) %>  <br>
           <%= f.collection_select :category_id, @categories, :id, :name, { prompt: "Select" }, { class: "form-control", required: true } %>
       </div>
 
@@ -46,7 +46,7 @@
       </div>
     <% end %>
     <br><br>
-    <%= link_to 'Back', sti_transaction_path("Transaction") %>
+    <%= link_to 'Back', :back %>
 <br><br>
   </div>
 </div>
