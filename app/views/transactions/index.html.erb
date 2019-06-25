@@ -13,8 +13,9 @@
   <thead>
     <tr>
       <th>Date</th>
-      <th><div style="float:right; margin-right:25px; ">Amount</div></th>
       <th>Type</th>
+      <th>Category</th>
+      <th><div style="text-align:right; margin-right:25px; ">Amount</div></th>
       <th></th>
       <th></th>
       <th></th>
@@ -24,8 +25,9 @@
     <% @invoices.each do |invoice| %>
       <tr>
         <td><%= invoice.trans_date %></td>
-        <td><div style="float:right; margin-right:25px; "><%= invoice.amount %></div></td>
         <td><%= invoice.type %></td>
+        <td><%= invoice.category.name %></td>
+        <td><div style="text-align:right; margin-right:25px; "><%= invoice.amount %></div></td>
         <td><%= link_to 'Show', sti_transaction_path(invoice.type, invoice) %></td>
         <td><%= link_to 'Edit', sti_transaction_path(invoice.type, invoice, :edit) %></td>
         <td><%= link_to 'Destroy', sti_transaction_path(invoice.type, invoice), method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -34,8 +36,9 @@
     <% if @type != "Transaction" %>
     <tr>
       <th>Total</th>
+      <td colspan="2"></td>
       <td><div style="float:right; margin-right:25px; "> <%= @total %> </div><td>
-      <td colspan="4"><td>
+      <td colspan="3"></td>
     <tr>
     <% end %>
   </tbody>
@@ -45,6 +48,8 @@
 <br>
 <% if @type !="Transaction" %>
 <%= link_to 'See all transactions', sti_transaction_path %> | 
+<% else %>
+<%= link_to "Export to PDF", request.params.merge(format: "pdf") %> |
 <% end %>
 <%= link_to "New Income", sti_transaction_path("Income", nil, :new) %> | 
 <%= link_to "New Expense", sti_transaction_path("Expense", nil, :new) %>
