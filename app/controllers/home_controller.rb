@@ -20,7 +20,7 @@ class HomeController < ApplicationController
                             min(transactions.amount) as min,
                             avg(transactions.amount) as avg ")
                    .group("categories.name")
-                   .where("transactions.user_id = #{current_user.id}")
+                   .where(transactions: {user_id: current_user.id})
 
   end
 

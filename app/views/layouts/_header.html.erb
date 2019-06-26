@@ -10,6 +10,8 @@
               <%= current_user.name %> <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
+              <li><%= link_to "New Income", sti_transaction_path("Income", nil, :new) %></li>
+              <li><%= link_to "New Expense", sti_transaction_path("Expense", nil, :new) %></li>
               <li><%= link_to "Settings", edit_user_registration_path %></li>
               <li class="divider"></li>
               <li>
