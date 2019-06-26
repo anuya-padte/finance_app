@@ -1,0 +1,8 @@
+- if @feed_items.any?
+  h4 Income Categories  
+  ol.microposts
+    = render @feed_items
+- if @feed_item2.any?
+  h4 Expense Categories  
+  ol.microposts
+    = render @feed_item2

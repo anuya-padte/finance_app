@@ -1,0 +1,22 @@
+h3 Form
+= form_for(@category) do |f|
+  -if @category.errors.any?
+    #error_explanation
+      h2
+        = pluralize(@category.errors.count, "error") 
+        | prohibited this category from being saved: 
+      ul
+        -@category.errors.full_messages.each do |msg|
+        li =msg
+  .field
+    = f.label :name
+    br/
+    = f.text_field :name, autofocus: true
+  .field
+    = f.label "Category Type" 
+    br/
+    = f.select :cat_type, Transaction.types.map {|r| [r.humanize]}, :selected => params[:type]
+  = f.submit "Add", class: "btn btn-primary"
+  br/
+  br/
+  = link_to "New #{params[:type]}", sti_transaction_path("#{params[:type]}", nil, :new)

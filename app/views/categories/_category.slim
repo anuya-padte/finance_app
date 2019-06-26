@@ -1,0 +1,4 @@
+li id="category-#{category.id}" 
+  = category.name
+  - if category.user_id == current_user.id
+    = link_to "\t(delete)", "categories/#{category.id}", method: :delete, data: { confirm: "You sure?" }
