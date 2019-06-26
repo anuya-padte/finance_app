@@ -1,0 +1,24 @@
+h1 Transaction
+table.table.table-condensed
+  tr
+    th Date
+    td= @transaction.trans_date
+  tr
+    th Description
+    td= @transaction.description
+  tr
+    th Amount
+    td= @transaction.amount
+  tr
+    th Type
+    td= @transaction.type
+  tr
+    th Category
+    td= @income.category.name
+= link_to 'Back', :back
+|  | 
+= link_to 'Edit', sti_transaction_path(@transaction.type, @transaction, :edit)
+|  | 
+= link_to 'Destroy', sti_transaction_path(@transaction.type, @transaction), method: :delete, data: { confirm: 'Are you sure?' }
+br/
+br/
