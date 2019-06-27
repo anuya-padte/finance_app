@@ -29,14 +29,12 @@ class TransactionsController < ApplicationController
     end
   end
 
-  def show
-    p "Reached show"
-    @income = Transaction.find(params[:id])
+  def show  
   end
 
   def new
     @transaction = type_class.new
-    @categories = Category.where(user_id: nil).or(Category.where(user_id: current_user.id)).where(cat_type: "#{type_class}")
+    @categories = Category.where(user_id: nil).or(Category.where(user_id: current_user.id)).where(cat_type: type)
   end
 
   def create
@@ -51,12 +49,10 @@ class TransactionsController < ApplicationController
   end
 
   def edit
-    @transaction = Transaction.find(params[:id])
-    @categories = Category.where(user_id: nil).or(Category.where(user_id: current_user.id)).where(cat_type: "#{type_class}")
+    @categories = Category.where(user_id: nil).or(Category.where(user_id: current_user.id)).where(cat_type: type)
   end
   
   def update
-    @transaction = Transaction.find(params[:id])
     if @transaction.update_attributes(tran_params)
       flash[:success] = "Transaction updated successfully"
       redirect_to @transaction
