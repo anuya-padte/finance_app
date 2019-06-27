@@ -8,20 +8,20 @@ class TransactionsController < ApplicationController
 
   def index
     @search = TransactionSearch.new(params[:search])
-    p "CURRENT FROM DATE: #{@search.date_from}"
+    # p "CURRENT FROM DATE: #{@search.date_from}"
     @all = @search.scope.where(user_id: current_user.id)
-    if "#{type_class}" == "Transaction"
+    if type == "Transaction"
       @pagy , @invoices = pagy(@all, items:5)
     else
-      @pagy , @invoices = pagy(@all.where(type: "#{type_class}"), items:5)
-      @total = @all.where(type: "#{type_class}").sum("amount")
+      @pagy , @invoices = pagy(@all.where(type: type), items:5)
+      @total = @all.where(type: type).sum("amount")
     end
 
     respond_to do |format|
       format.html
       format.pdf do
         pdf = Statement.new(@search, @all, view_context)
-        p "PDF FROM DATE #{@search.date_from}"
+        #p "PDF FROM DATE #{@search.date_from}"
         send_data pdf.render, filename: "statement_#{Time.now.strftime('%Y-%m-%d_%H-%M-%S')}",
                               type: "application/pdf",
                               disposition: "inline"
