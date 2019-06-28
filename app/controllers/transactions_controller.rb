@@ -7,21 +7,18 @@ class TransactionsController < ApplicationController
   before_action :set_type
 
   def index
-    @search = TransactionSearch.new(params[:search])
-    # p "CURRENT FROM DATE: #{@search.date_from}"
-    @all = @search.scope.where(user_id: current_user.id)
-    if type == "Transaction"
-      @pagy , @invoices = pagy(@all, items:5)
-    else
-      @pagy , @invoices = pagy(@all.where(type: type), items:5)
-      @total = @all.where(type: type).sum("amount")
+    para = {}
+    if !params[:search].nil?
+      para[:date_from] = params[:search][:date_from]
+      para[:date_to] = params[:search][:date_to]
     end
+    @all, @total, @search = TransactionList.run(type: type, search: para).result
+    @pagy, @invoices = pagy(@all, items:5)
 
     respond_to do |format|
       format.html
       format.pdf do
         pdf = Statement.new(@search, @all, view_context)
-        #p "PDF FROM DATE #{@search.date_from}"
         send_data pdf.render, filename: "statement_#{Time.now.strftime('%Y-%m-%d_%H-%M-%S')}",
                               type: "application/pdf",
                               disposition: "inline"
